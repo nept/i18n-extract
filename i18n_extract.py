@@ -10,6 +10,7 @@ import re
 import pprint
 import json
 
+
 class I18nExtract:
     regex = r"polyglot.t\(['\"](.*)['\"]\)"
     __correct_index = []
@@ -20,9 +21,8 @@ class I18nExtract:
         self.__extract_template_keys()
 
     def __extract_template_keys(self):
-        os.chdir(self.template_folder)
-
-        for template_file in glob.glob("*.jade"):
+        #print os.path.realpath(self.locale_folder)
+        for template_file in glob.glob(os.path.join(os.path.realpath(self.template_folder), "*.jade")):
             file_ = open(template_file).read()
             results = re.findall(self.regex, file_)
             print "%s index were found in %s" % (len(results), template_file)
@@ -50,9 +50,7 @@ class I18nExtract:
         json.dump(self.json_datas, open(json_file, 'w'), indent=4)
 
     def __update_locales(self):
-        os.chdir(self.locale_folder)
-
-        for json_file in glob.glob("*.json"):
+        for json_file in glob.glob(os.path.join(os.path.realpath(self.locale_folder), "*.json")):
             if os.stat(json_file)[stat.ST_SIZE] > 0:
                 print "\nProcessing %s file:" % json_file
                 with open(json_file, "r") as feed_json:
@@ -61,26 +59,25 @@ class I18nExtract:
 
                         self.__remove_data(json_file)
                         self.__insert_data(json_file)
-                        print "Translation file is updated"
+                        print "\nTranslation file is updated"
                     except (ValueError, KeyError, TypeError):
                         print "\n--------------- JSON FORMAT ERROR ---------------\n ValuError: %s\n KeyError: %s\n TypeError: %s\n" % (
                             ValueError, KeyError, TypeError)
 
 
 try:
-    templates_folder = None
-    locales_folder = None
-    options, args = getopt.getopt(sys.argv[1:], "t:l:")
-
-    if sys.argv > 0:
-    	for o, a in options:
-	        if o == '-t':
-	            templates_folder = a
-	        elif o == '-l':
-        		locales_folder = a
-    	if templates_folder is not None and locales_folder is not None:
-	        I18nExtract(templates_folder, locales_folder)
-	else:
-		print("Usage: %s -t < templates folder > -l < locales folder >" % sys.argv[0])
+    if len(sys.argv) > 1:
+        templates_folder = None
+        locales_folder = None
+        options, args = getopt.getopt(sys.argv[1:], "t:l:")
+        for o, a in options:
+            if o == '-t':
+                templates_folder = a
+            elif o == '-l':
+                locales_folder = a
+        if templates_folder is not None and locales_folder is not None:
+            I18nExtract(templates_folder, locales_folder)
+    else:
+        print("Usage: %s -t < templates folder > -l < locales folder >" % sys.argv[0])
 except:
     print("Usage: %s -t < templates folder > -l < locales folder >" % sys.argv[0])
