@@ -39,7 +39,7 @@ class I18nExtract:
                 self.json_datas.update({data_index: None})
                 print "['%s'] as been added from the file %s" % (data_index, json_file)
 
-        json.dump(self.json_datas, open(json_file, 'w'), indent=4)
+        json.dump(self.json_datas, open(json_file, 'w'), indent=4, sort_keys=True)
 
     def __remove_data(self, json_file):
         for key in self.json_datas.keys():
@@ -47,7 +47,7 @@ class I18nExtract:
                 del self.json_datas[key]
                 print "['%s'] as been deleted from the file %s" % (key, json_file)
 
-        json.dump(self.json_datas, open(json_file, 'w'), indent=4)
+        json.dump(self.json_datas, open(json_file, 'w'), indent=4, sort_keys=True)
 
     def __update_locales(self):
         for json_file in glob.glob(os.path.join(os.path.realpath(self.locale_folder), "*.json")):
