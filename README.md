@@ -62,7 +62,7 @@ In fr.json and en.json
 
 ## Change Log
 
-`0.2.0` - February 11, 2014
+`0.3.0` - February 11, 2014
 
 -Removed the option to set one argument for found anchors in special extentions. [Now all extensions are supported]
 
