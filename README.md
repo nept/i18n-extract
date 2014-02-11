@@ -1,16 +1,20 @@
-#Who to use ***i18n_extract.py*** python script for Polyglot ?
+# i18n-extract
 
-    -First copy and paste the python script into your folder
-    -Then execute the script without forgetting to set default settings
-        - "-t" is the directory where your templates file are stored
-        - "-l" is the directory where your translates file re stored
+> a simple Python script to parse usage of [Polyglot](https://github.com/airbnb/polyglot.js)
 
-    By default, these are files with the extension ".jade" that are sought. 
-    You can pass an optional parameter to specify the type of extension to be treated (.html, .hbs, ...)
-    To do this, write the same command with the "-e" option and the extension to be addressed preceded by a dot.
+## Usage 
+
+- First copy and paste the python script into your folder (or add as submodule)
+- Then execute the script without forgetting to set
+    - `-t` is the directory where your templates file are stored
+    - `-l` is the directory where your translates file re stored
+
+By default, these are files with the extension ".jade" that are sought. 
+You can pass an optional parameter to specify the type of extension to be treated (.html, .hbs, ...)
+To do this, write the same command with the "-e" option and the extension to be addressed preceded by a dot.
 
         
-####Exemple:
+### Example
 
 ```python
 #For treated templates with default extention .jade
@@ -20,7 +24,7 @@
 ./i18n_extract.py -t templates/ -l locales/ -e ".html"
 ```
 
-####Result:
+### Result
 
     4 index were found in /i18n-extract/templates/sidebar.jade
     ['hello', 'sidebar', 'content', 'help']
@@ -46,8 +50,9 @@
     ['help'] as been added from the file /i18n-extract/locales/fr.json
     Translation file is updated
 
-------------
-###Change Log
+---
+
+## Change Log
 
 `0.2.0` - January 20, 2014
 
