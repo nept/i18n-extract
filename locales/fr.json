@@ -1,7 +1,7 @@
 {
-    "content": null, 
-    "sidebar": null, 
-    "hello": null, 
-    "welcome": null, 
-    "help": null
+    "calendar.date": null, 
+    "help": null, 
+    "user.account": null, 
+    "user.logout": null, 
+    "user.welcome": null
 }

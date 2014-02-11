@@ -1,0 +1,1 @@
+polyglot.t('user.account')
