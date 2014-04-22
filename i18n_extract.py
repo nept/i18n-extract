@@ -13,7 +13,7 @@ import fnmatch
 import io
 
 class I18nExtract:
-    regex = r"polyglot.t\(['\"](.*)['\"]\)"
+    regex = r"polyglot.t\(['\"](.*?)['\"][,\)]"
     __correct_index = []
 
     def __init__(self, template_folder, locale_folder):
