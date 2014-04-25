@@ -10,9 +10,10 @@ import re
 import pprint
 import json
 import fnmatch
+import io
 
 class I18nExtract:
-    regex = r"polyglot.t\(['\"](.*)['\"]\)"
+    regex = r"polyglot.t\(['\"](.*?)['\"][,\)]"
     __correct_index = []
 
     def __init__(self, template_folder, locale_folder):
@@ -53,7 +54,8 @@ class I18nExtract:
                 self.json_datas.update({data_index: None})
                 print "['%s'] as been added." % (data_index)
 
-        json.dump(self.json_datas, open(json_file, 'w'), indent=4, sort_keys=True)
+        with io.open(json_file, 'w', encoding='utf-8') as f:
+          f.write(unicode(json.dumps(self.json_datas, indent=4, sort_keys=True, ensure_ascii=False)))
 
     '''
     Updates all the keys contained in the nTranslation files
@@ -64,8 +66,8 @@ class I18nExtract:
                 del self.json_datas[key]
                 print "['%s'] as been deleted." % (key)
 
-        json.dump(self.json_datas, open(json_file, 'w'), indent=4, sort_keys=True)
-
+        with io.open(json_file, 'w', encoding='utf-8') as f:
+          f.write(unicode(json.dumps(self.json_datas, indent=4, sort_keys=True, ensure_ascii=False)))
     '''
     Call __remove_data function and __insert_data function
     '''

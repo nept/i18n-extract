@@ -1,4 +1,6 @@
-polyglot.t('user.welcome')
-polyglot.t('user.account')
-polyglot.t('user.logout')
+polyglot.t('user.welcome', {username: 'username'})
+polyglot.t('user.account', {data: polyglot.t('date.today')})
+polyglot.t('user.logout', {
+	username: 'username'
+})
 polyglot.t('help')
